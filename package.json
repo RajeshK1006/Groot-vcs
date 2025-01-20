@@ -1,7 +1,8 @@
 {
   "name": "groot",
+  "type": "module",
   "version": "1.0.0",
-  "main": "groot.js",
+  "main": "test.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
