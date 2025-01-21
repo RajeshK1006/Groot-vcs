@@ -1,6 +1,7 @@
 // src/services/initRepo.js
 import fs from 'fs/promises';
 import path from 'path';
+import initBranch from './initBranch.js';
 
 const initRepo = async (repoPath = ".") => {
     const grootFolder = path.join(repoPath, '.groot');
@@ -13,6 +14,7 @@ const initRepo = async (repoPath = ".") => {
         await fs.writeFile(headPath, '', { flag: 'wx' });
         await fs.writeFile(indexPath, JSON.stringify([]), { flag: 'wx' });
         console.log("Initialized .groot folder");
+        await initBranch(repoPath);
     } catch (error) {
         console.log("Already initialized the .groot folder");
     }

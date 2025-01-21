@@ -31,6 +31,30 @@ async function showCommitDiff(commitHash) {
     console.log(`Showing commit diff for commit: ${commitHash}`);
 }
 
+async function listBranches() {
+    const Groot = await groot();  // Initialize the Groot repo
+    await Groot.listBranches();  // List all branches
+    console.log("Listing all branches...");
+}
+
+async function createBranch(branchName) {
+    const Groot = await groot();  // Initialize the Groot repo
+    await Groot.createBranch(branchName);  // Create a new branch
+    console.log(`Branch ${branchName} created.`);
+}
+
+async function pushToBranch(message) {
+    const Groot = await groot();  // Initialize the Groot repo
+    await Groot.push(message);  // Push commit to current branch
+    console.log(`Commit pushed with message -> "${message}"`);
+}
+
+async function deleteBranch(branchName) {
+    const Groot = await groot();  // Initialize the Groot repo
+    await Groot.deleteBranch(branchName);  // Delete the specified branch
+    console.log(`Branch ${branchName} deleted.`);
+}
+
 program
     .command('init')
     .description('Initialize the repository')
@@ -55,6 +79,27 @@ program
     .command('show <commitHash>')
     .description('Show commit diff for a specific commit')
     .action(showCommitDiff);
+
+program
+    .command('list-branches')
+    .description('List all branches')
+    .action(listBranches);
+
+program
+    .command('create-branch <branchName>')
+    .description('Create a new branch')
+    .action(createBranch);
+
+program
+    .command('push <message>')
+    .description('Push changes to the current branch')
+    .action(pushToBranch);
+
+program
+    .command('delete-branch <branchName>')
+    .description('Delete a branch')
+    .action(deleteBranch);
+
 
 // Parse the command-line arguments
 program.parse(process.argv);

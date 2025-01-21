@@ -5,6 +5,11 @@ import commitChanges from './services/commitChanges.js';
 import showLog from './services/showLog.js';
 import showCommitDiff from './services/showCommitDiff.js';
 
+import createBranch from './services/createBranch.js';
+import pushToBranch from './services/pushToBranch.js';
+import listBranches from './services/listBranches.js';
+import deleteBranch from './services/deleteBranch.js';
+
 const groot = async () => {
     const repo = await initRepo();
 
@@ -14,6 +19,10 @@ const groot = async () => {
         commit: (message) => commitChanges(repo, message),
         log: () => showLog(repo),
         show: (commitHash) => showCommitDiff(repo, commitHash),
+        createBranch: (repo, branchName) => createBranch(repo, branchName),
+        push: (commitMessage) => pushToBranch(repo, commitMessage),
+        listBranches: () => listBranches(repo.grootFolder),
+        deleteBranch: (branchName) => deleteBranch(repo, branchName),
     };
 };
 
